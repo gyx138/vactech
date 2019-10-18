@@ -1,57 +1,42 @@
-# Travis CI Tutorial
-# https://docs.travis-ci.com/user/tutorial/
-# The job lifecycle 
-# https://docs.travis-ci.com/user/job-lifecycle/#the-job-lifecycle
+language: node_js
 
-language: node_js # 指定语言环境
-sudo: required # 是否需要 sudo 权限
-node_js: # 指定 NodeJS 版本
-  - 8
+sudo: required
 
-#cache:
-#  directories:
-#    - node_modules
+node_js: 8
 
-branches: # 指定要构建的分支
-  only: # only 表示只构建以下分支
+branches:
+  only:
     - master
-
-# S: Build Lifecycle
 
 before_install:
   - echo "Hexo environment pre install start."
-  - export  TZ='Asia/Shanghai'  # 解决 Travis CI commit comments 的时差问题
+  - export  TZ='Asia/Shanghai'
 
-install: # 在安装项目环境阶段需要运行的命令，一条一行，类似的还有 before_install
+install:
   - npm install -g hexo-cli
   - npm install
   - npm install hexo-deployer-git --save
-  - npm install -g gulp@3.9.1 # 指定安装 gulp 3.9.1 版本
+  - npm install -g gulp@3.9.1
   - echo "hexo and packages install complete."
 
 before_script:
   - sed -i "s~url: http://vactech.gitee.io~url: http://vactech.github.io~" _config.yml
-  # 替换 hexo-theme-Wikitten/_config.yml>history_control: gitee 为 github
   - sed -i "s~server_link: https://gitee.com~server_link: https://github.com~" theme/Wikitten/_config.yml
   - sed -i "s~repertory: vactech~repertory: vactech.github.io~" theme/Wikitten/_config.yml
   - sed -i "s~branch: hexo/wiki~branch: Wikitten~" theme/Wikitten/_config.yml
-  # 替换百度统计
   - sed -i "s~889e7313e1937fcadec1b944c9dd316a~0847191c64787500a81863beb4803445~" themes/Wikitten/_config.yml
 
-script: # 在构建阶段需要运行的命令，一条一行，类似的还有 before_script、after_script
+script:
   - hexo clean
-  - hexo generate # Hexo 常规命令，执行清理和生成
+  - hexo generate
 
-after_success: # 在构建成功后要运行的命令，构建失败不会执行
+after_success:
   - gulp
   - git config user.name "${GIT_VAC_NAME}"
   - git config user.email "${GIT_VAC_EMAIL}"
   - sed -i "s~git@gitee.com:~https://${GIT_VAC_TOKEN}@github.com/~" _config.yml
   - sed -i "s~vactech/vactech.git~vactech/vactech.github.io.git~" _config.yml
-  # 部署到 vactech/vactech.github.io
-  - hexo deploy #> /dev/null # 通过 hexo 的 deploy 命令部署博客
+  - hexo deploy
 
-# E: Build LifeCycle
-
-notifications: # 设置通知项
+notifications:
   email: true
