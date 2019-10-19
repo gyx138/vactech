@@ -1,9 +1,30 @@
-language: node_js
+# Travis CI Tutorial
+# https://docs.travis-ci.com/user/tutorial/
+# The job lifecycle 
+# https://docs.travis-ci.com/user/job-lifecycle/#the-job-lifecycle
 
-sudo: required
+language: node_js # 指定语言环境
+sudo: required # 是否需要 sudo 权限
+node_js: # 指定 NodeJS 版本
+  - 8
 
-node_js: 8
+#cache:
+#  directories:
+#    - node_modules
 
-branches:
-  only:
-    - master
+branches: # 指定要构建的分支
+  only: # only 表示只构建以下分支
+    - Wikitten
+
+# S: Build Lifecycle
+
+before_install:
+  - echo "Hexo environment pre install start."
+  - export  TZ='Asia/Shanghai'  # 解决 Travis CI commit comments 的时差问题
+
+install: # 在安装项目环境阶段需要运行的命令，一条一行，类似的还有 before_install
+  - npm install -g hexo-cli
+  - npm install
+  - npm install hexo-deployer-git --save
+  - npm install -g gulp@3.9.1 # 指定安装 gulp 3.9.1 版本
+  - echo "hexo and packages install complete."
