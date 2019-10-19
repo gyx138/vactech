@@ -3,28 +3,32 @@
 # The job lifecycle 
 # https://docs.travis-ci.com/user/job-lifecycle/#the-job-lifecycle
 
-language: node_js # 指定语言环境
-sudo: required # 是否需要 sudo 权限
-node_js: # 指定 NodeJS 版本
+language: node_js   # 指定语言环境
+sudo: required      # 是否需要 sudo 权限
+node_js:            # 指定 NodeJS 版本
   - 8
 
 #cache:
 #  directories:
 #    - node_modules
 
-branches: # 指定要构建的分支
-  only: # only 表示只构建以下分支
+branches:   # 指定要构建的分支
+  only:     # only 表示只构建以下分支
     - master
 
 # S: Build Lifecycle
 
 before_install:
   - echo "Hexo environment pre install start."
-  - export  TZ='Asia/Shanghai'  # 解决 Travis CI commit comments 的时差问题
+  - export TZ='Asia/Shanghai'   # 解决 Travis CI commit comments 的时差问题
 
 install: # 在安装项目环境阶段需要运行的命令，一条一行，类似的还有 before_install
   - npm install -g hexo-cli
   - npm install
   - npm install hexo-deployer-git --save
-  - npm install -g gulp@3.9.1 # 指定安装 gulp 3.9.1 版本
+  - npm install -g gulp@3.9.1                   # 指定安装 gulp 3.9.1 版本
   - echo "hexo and packages install complete."
+
+before_script:
+  - sed -i "s~url: http://vactech.gitee.io~url: http://vactech.github.io~" _config.yml
+  # 替换 hexo-theme-Wikitten/_config.yml>history_control: gitee 为 github
