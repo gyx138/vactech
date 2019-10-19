@@ -34,7 +34,7 @@ before_script:
   # 替换 hexo-theme-Wikitten/_config.yml>history_control: gitee 为 github
 
 before_script:
-  - sed -i 's~url: http://vactech.gitee.io~url: http://vactech.github.io~' _config.yml
+  - sed -i 's~vactech.gitee.io~vactech.github.io~' _config.yml
   # 替换 hexo-theme-Wikitten/_config.yml>history_control: gitee 为 github
   - sed -i 's~gitee.com~github.com~' theme/Wikitten/_config.yml
   - sed -i 's~repertory: vactech~repertory: vactech.github.io~' theme/Wikitten/_config.yml
