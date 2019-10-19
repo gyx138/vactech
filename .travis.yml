@@ -29,20 +29,8 @@ install: # 在安装项目环境阶段需要运行的命令，一条一行，类
   - npm install -g gulp@3.9.1                   # 指定安装 gulp 3.9.1 版本
   - echo "hexo and packages install complete."
 
-before_script:
-  - sed -i "s~vactech.gitee.io~vactech.github.io~" _config.yml
-  # 替换 hexo-theme-Wikitten/_config.yml>history_control: gitee 为 github
-
-before_script:
-  - sed -i "s~vactech.gitee.io~vactech.github.io~" _config.yml
-  # 替换 hexo-theme-Wikitten/_config.yml>history_control: gitee 为 github
-  - sed -i "s~gitee.com~github.com~" theme/Wikitten/_config.yml
-  - sed -i "s~repertory: vactech~repertory: vactech.github.io~" theme/Wikitten/_config.yml
-  - sed -i "s~branch: hexo/wiki~branch: Wikitten~" theme/Wikitten/_config.yml
-  # 替换百度统计
-  - sed -i "s~889e7313e1937fcadec1b944c9dd316a~0847191c64787500a81863beb4803445~" themes/Wikitten/_config.yml
-
 script: # 在构建阶段需要运行的命令，一条一行，类似的还有 before_script、after_script
+  - source travis_before_script.sh
   - hexo clean
   - hexo generate # Hexo 常规命令，执行清理和生成
 
