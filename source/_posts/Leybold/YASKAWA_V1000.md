@@ -9,6 +9,8 @@ tags: [DRYVAC, DRYVAC SYSTEM, RUVAC WH, YASKAWA]
 
 ![](pinout_signal.png)
 
+$$H3-12 = \frac {最低频率}{最高频率} \cdot 100.0\%$$
+
 ### 电压信号
 
 {% tabs 电压信号, 2 %}
@@ -137,6 +139,8 @@ tags: [DRYVAC, DRYVAC SYSTEM, RUVAC WH, YASKAWA]
 {% endtabs %}
 
 ## 变频器频率信号输出 AM-AC
+
+![](pinout_signal.png)
 
 ### 电压信号 0~120Hz => 0~10VDC
 
