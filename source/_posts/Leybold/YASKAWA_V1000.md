@@ -2,7 +2,7 @@
 title: YASKAWA V1000
 date: 2019-10-20 13:52:04
 mathjax: true
-tags: [DRYVAC, DRYVAC SYSTEM, RUVAC WH]
+tags: [DRYVAC, DRYVAC SYSTEM, RUVAC WH, YASKAWA]
 ---
 
 ## 变频器频率信号输入 A2-AC
@@ -147,31 +147,34 @@ tags: [DRYVAC, DRYVAC SYSTEM, RUVAC WH]
 | H4-01  | 106 | <mark>102</mark> |
 | H4-02  | 999 | <mark>100</mark> |
 
-{% echarts 400 '85%' %}
+{% echarts 500 '62%' %}
 var data = [];
 
 for (var u = 0; u <= 10; u += 0.2) {
-    var f = 12*u;
-    f = Math.round(f*100)/100;
-    data.push([u, f]);
+	var f = 12*u;
+	f = Math.round(f*100)/100;
+	data.push([u, f]);
 }
 
 option = {
-    tooltip: {},
+	tooltip: {
+		trigger: 'axis',
+		snap: true
+	},
 	xAxis: {
-		name: 'U/V',
+		name: '电压 U/V',
 		interval: 1
 	},
 	yAxis: {
-		name: 'f/Hz',
+		name: '频率 f/Hz',
 		interval: 10
 	},
 	series: [{
 		data: data,
 		type: 'line',
-        lineStyle: {
-            width: 4
-        }
+		lineStyle: {
+			width: 4
+		}
 	}]
 };
 {% endecharts %}
