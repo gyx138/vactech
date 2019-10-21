@@ -4,6 +4,7 @@ date: 2019-09-18
 toc: true
 tags: [莱宝, 工具]
 categories: tech
+password: passwd
 ---
 
 | 名称       | 参考 |
