@@ -21,4 +21,4 @@ tags: [DRYVAC, DRYVAC SYSTEM, ProfiBUS]
 5. 在蓝圈内输入ProfiBUS地址，确认红圈内是有打勾的。
 ![](5_profibus.jpg)
 
-6. PROFIBUS 地址设置完成。
+6. ProfiBUS 地址设置完成。
